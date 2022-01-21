@@ -8,7 +8,8 @@ const Rightside = () => {
     const [page, setPage] = useState('Today')
     const [active, setActive] = useState(false)
     const current = useSelector((state) => state.weathers.current)
-    
+    const  err = useSelector((state) => state.weathers.error)
+    console.log(err);
     function Setpages(pg, index) {
         return <li role="button"
             key={index}
@@ -23,6 +24,12 @@ const Rightside = () => {
     return (
         <div className="col-md-9 col-sm-12 p-4 overflow-auto" style={{ backgroundColor: 'rgb(246, 246, 248)', height: '90vh' }}>
             <div className="main">
+                {
+                    err && err != undefined ? 
+                    <div className="alert alert-danger" role="alert">
+                   City not found
+                  </div> : null
+                }
                 <div className="d-flex align-items-center justify-content-between">
                     <ul className=" nav d-flex align-items-center justify-content-start fs-5 fw-bold">
                         {

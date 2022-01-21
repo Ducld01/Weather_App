@@ -9,6 +9,7 @@ const Leftside = () => {
     const [value, setValue] = useState('hanoi')
     const data = useSelector((state) => state.weathers.weather)
     const dispatch = useDispatch();
+    const mainInput = React.useRef();
     
     useEffect(() => {
         const fetchdata = async () => {
@@ -19,7 +20,9 @@ const Leftside = () => {
     const search = async evt => {
         if (evt.key === "Enter") {
            await dispatch(fetchWeather(value))
+           mainInput.current.value = ''
         }
+        
     }
 
     return (
@@ -28,6 +31,7 @@ const Leftside = () => {
                 <div className="main">
                     <div className="mb-3">
                         <input type="text"
+                            ref={mainInput}
                             className="form-control"
                             placeholder="Press city and enter"
                             onChange={(e) => setValue(e.target.value)}
